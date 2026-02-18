@@ -12,18 +12,18 @@ let button_all=document.createElement("button");
 button_all.textContent="Все";
 button_all.addEventListener("click", function(){
     currentFilter = "all";
-    renderTasks();
+    updateApp();
 })
 let button_active=document.createElement("button");
 button_active.textContent="Активные";
 button_active.addEventListener("click", function(){
     currentFilter = "active";
-    renderTasks();
+    updateApp();
 })
 let button_done=document.createElement("button");
 button_done.addEventListener("click", function(){
     currentFilter = "done";
-    renderTasks();
+    updateApp();
 })
 div.append(button_all);
 div.append(button_active);
@@ -37,26 +37,29 @@ add.addEventListener("click", function () {
         done: false
     });
     a++;
-    renderTasks();
+    updateApp();
 });
 doneById.addEventListener("click", function(){
     let id=document.getElementById("taskId").value;
     for(let i=0;i<tasks.length;i++){
         if(tasks[i].id===Number(id)){
             tasks[i].done=!tasks[i].done;
-            renderTasks();
+            updateApp();
         }
     }
 })
 clean.addEventListener("click", function(){
     tasks=[];
     a=0;
-    renderTasks();
+    updateApp();
 })
 doneLast.addEventListener("click", function () {
     tasks[tasks.length - 1].done = !tasks[tasks.length - 1].done;
-    renderTasks();
+    updateApp();
 })
+function updateApp() {
+    renderTasks();
+}
 function renderTasks() {
     list.innerHTML="";
     let filteredTasks = tasks;
